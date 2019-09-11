@@ -162,25 +162,42 @@ class GameModelTests(TestCase):
 
     def test_is_game_over_is_false_if_guesses_left(self):
         game = Game(
-            guesses_allowed = 5,
-            guesses_taken  = 5
+            guesses_allowed=5,
+            guesses_taken=5
         )
-        
+
         guesses_left = game.guesses_allowed - game.guesses_taken
         self.assertEquals(guesses_left, 0)
 
     def test_is_game_over_is_false_if_not_all_letters_guessed(self):
-        initialLettersGuest = ['A','B','C','D','E','F']
         game = Game(
-            word = 'ABCXYZ',
-            guessed_word_state=['', '', 'S', '', 'W', '', 'Z'],
-            letters_guessed=initialLettersGuessed.copy(),
             guesses_allowed=5,
-            guesses_taken=2
+            guesses_taken=2,
+            is_game_over=False
         )
+        isGameFinished = game.is_game_over
+        self.assertEquals(isGameFinished, False)
 
     def test_is_game_over_is_true_if_no_guesses_left(self):
-        pass
+        game = Game(
+            guesses_allowed=5,
+            guesses_taken=5,
+            is_game_over=True
+        )
+        isGameFinished = game.is_game_over
+        self.assertEquals(isGameFinished, True)
 
     def test_is_game_over_is_true_if_all_letters_guessed(self):
-        pass
+        WordToGuess = 'HELLO'
+        total = ''
+        game = Game(
+            letters_guessed=['H', 'E', 'L', 'L', 'O'],
+            is_game_over=True
+        )
+        IsGameFinished = game.is_game_over
+
+        for j in game.letters_guessed:
+            total = total + j
+
+        if total == WordToGuess:
+            self.assertEquals(IsGameFinished, True)
