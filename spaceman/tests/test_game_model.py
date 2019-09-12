@@ -160,23 +160,40 @@ class GameModelTests(TestCase):
     # HINT: considering adding a fixture or other widely scoped variables if you feel ]hat will
     #  make this easier
 
+
+# This test makes sure that the is game over variable returns with false if and only if the guesses left are greater than zero
+
+
     def test_is_game_over_is_false_if_guesses_left(self):
         game = Game(
             guesses_allowed=5,
-            guesses_taken=5
-        )
-
-        guesses_left = game.guesses_allowed - game.guesses_taken
-        self.assertEquals(guesses_left, 0)
-
-    def test_is_game_over_is_false_if_not_all_letters_guessed(self):
-        game = Game(
-            guesses_allowed=5,
-            guesses_taken=2,
+            guesses_taken=4,
             is_game_over=False
         )
         isGameFinished = game.is_game_over
-        self.assertEquals(isGameFinished, False)
+        guesses_left = game.guesses_allowed - game.guesses_taken
+        if guesses_left > 0:
+            self.assertEquals(isGameFinished, False)
+        else:
+            self.assertEquals(isGameFinished, True)
+#
+
+    def test_is_game_over_is_false_if_not_all_letters_guessed(self):
+        testword = "HELLO"
+        total = ''
+        game = Game(
+            letters_guessed=['H', 'E', 'L'],
+            is_game_over=False
+        )
+        for i in game.letters_guessed:
+            total = total + i
+
+        if testword != total:
+            isGameFinished = game.is_game_over
+            self.assertEquals(isGameFinished, False)
+
+        else:
+            self.assertNotEquals(isGameFinished, True)
 
     def test_is_game_over_is_true_if_no_guesses_left(self):
         game = Game(
