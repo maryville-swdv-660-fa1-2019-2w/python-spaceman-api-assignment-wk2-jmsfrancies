@@ -174,9 +174,8 @@ class GameModelTests(TestCase):
         guesses_left = game.guesses_allowed - game.guesses_taken
         if guesses_left > 0:
             self.assertEquals(isGameFinished, False)
-        else:
-            self.assertEquals(isGameFinished, True)
-#
+
+
 
     def test_is_game_over_is_false_if_not_all_letters_guessed(self):
         testword = "HELLO"

@@ -73,17 +73,15 @@ class GameApiViewTests(TestCase):
     # TODO: Add tests for Getting a game's solution
     # HINT: remember the `setUp` fixture that is in this test class,
     #   it constructs things that might be useful
-"""
-    def Get_solution(self):
-        with patch.object(Game.objects, 'get') as mock_get:
-            self.mock_game.is_game_over = True
-            mock_request = self.request_factory.put('dummy', json.dumps(
-                {'is_game_over': 'True'}), content_type='application/json')
-            response = game_view(mock_request, 25)
-            mock_get.assert_called_with(pk=25)
-            self.assertEquals(response.status_code, 200)
-"""
 
+
+def getSolution(self):
+    with patch.objects(Game.objects,'get') as mock_get:
+        self.mock_game.is_game_over = True
+        self.mock_game.word = 'TESTWORD'
+        
+        if self.mock_game.is_game_over == True:
+                self.assert_Equals(self.mock_game,self.mock_game,self.mock_game.word)
 
 def if_all_guesses_are_wrong(self):
-        pass
+    pass
